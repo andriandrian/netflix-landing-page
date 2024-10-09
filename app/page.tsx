@@ -1,55 +1,30 @@
 import Image from "next/image";
+import netflixBg from "../public/netflix-bg.jpg";
+
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="">
+      <main className="relative">
+        <Image src={netflixBg} alt="Netflix Background" className="absolute w-full z-0 h-screen" />
+        <div className="absolute bg-black opacity-60 z-2 w-full h-screen"></div>
+        <div className="relative h-screen w-full flex items-center justify-center flex-col">
+          <h1 className="text-6xl font-black text-center leading-[5rem] max-w-[664px]">
+            Unlimited movies, TV shows, and more
+          </h1>
+          <p className="mt-6 text-xl font-bold">Starts at IDR 54,000. Cancel anytime.</p>
+          <p className="mt-8 text-base">Ready to watch? Enter your email to create or restart your membership.</p>
+          <form className="flex w-full max-w-[664px] justify-center items-center mt-4">
+            <input type="email" placeholder="Email address" className="bg-transparent w-2/3 px-6 py-4 rounded-sm border-solid border-white border" />
+            <button className="bg-red-600 text-white w-fit font-bold px-4 h-[60px] rounded-sm ml-2">Get Started</button>
+          </form>
         </div>
+        <section className="px-[354px] h-screen">
+          <h1 className="text-3xl">Trending Now</h1>
+        </section>
+
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      {/* <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -95,7 +70,7 @@ export default function Home() {
           />
           Go to nextjs.org →
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 }
