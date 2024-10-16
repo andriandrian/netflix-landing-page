@@ -25,3 +25,10 @@ body {
     text-wrap: balance;
   }
 }
+
+.text-outline {
+  -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+  
+}
