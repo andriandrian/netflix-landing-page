@@ -30,5 +30,40 @@ body {
   -webkit-text-fill-color: black; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: white;
-  
+}
+
+.custom-gradient {
+  background: radial-gradient(
+    50% 500% at 50% -420%,
+    rgba(64, 97, 231, 0.4) 80%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+.custom-parent {
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  top: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  border: solid 0.25rem transparent;
+  border-top-left-radius: 50% 100%;
+  border-top-right-radius: 50% 100%;
+  border-bottom: none;
+  background: radial-gradient(50% 500% at 50% -420%, rgba(64, 97, 231, 0.4) 80%, rgba(0, 0, 0, 0.1) 100%), black;
+  background-clip: padding-box;
+}
+
+.custom-child {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: -0.25rem;
+  border-top-left-radius: 50% 100%;
+  border-top-right-radius: 50% 100%;
+  background: linear-gradient(to right, rgba(33, 13, 22, 1) 16%, rgba(184, 40, 105, 1), rgba(229, 9, 20, 1), rgba(184, 40, 105, 1), rgba(33, 13, 22, 1) 84%);
 }

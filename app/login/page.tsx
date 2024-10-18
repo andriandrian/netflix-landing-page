@@ -3,7 +3,7 @@ import backgroundImage from "../../public/backgroundImage.jpg";
 
 export default function Page() {
     return (
-        <div className="h-screen w-full">
+        <div className="h-screen w-full"> 
             <Image src={backgroundImage} alt="bg" layout="fill" objectFit="cover" />
             <div className="bg-black opacity-60 h-full w-full absolute"></div>
             <div className="flex justify-center items-center h-full relative ">

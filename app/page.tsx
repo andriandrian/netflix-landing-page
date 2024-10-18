@@ -20,10 +20,10 @@ import poster7 from "../public/poster7.png";
 import poster8 from "../public/poster8.png";
 import poster9 from "../public/poster9.png";
 import poster10 from "../public/poster10.png";
-
 import * as React from 'react';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import { OutlinedInputProps } from "@mui/material";
 
 
 const RedditTextField = styled((props: TextFieldProps) => (
@@ -68,28 +68,54 @@ const RedditTextField = styled((props: TextFieldProps) => (
 
 export default function Home() {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [lastOpen, setLastOpen] = useState("");
-
-  // const carouselWidth = null;
-  // check id carousel width
-
-
+  const [lastOpen, setLastOpen] = useState(0);
   const containerRef = useRef<HTMLInputElement>(null)
-  let ITEM_WIDTH = 900;
+  const ITEM_WIDTH = 900;
+  // const carouselWidth = null;
 
   // const carouselWidth = document.getElementById("trendCaraosell")
   // if (carouselWidth) {
-    // console.log(carouselWidth.clientWidth)
-    // ITEM_WIDTH = carouselWidth.clientWidth / 2;
-    // console.log(ITEM_WIDTH)
+  // console.log(carouselWidth.clientWidth)
+  // ITEM_WIDTH = carouselWidth.clientWidth / 2;
+  // console.log(ITEM_WIDTH)
   // }
   // console.log(carouselWidth?.clientWidth)
+
+  const indonesiaContent = [
+    {
+      label: "Movies",
+      value: "idn1"
+    },
+    {
+      label: "TV Shows",
+      value: "idn2"
+    }
+  ]
+
+  const globalContent = [
+    {
+      label: "Movies - English",
+      value: "global1"
+    },
+    {
+      label: "Movies - Other Languages",
+      value: "global2"
+    },
+    {
+      label: "TV Shows - English",
+      value: "global3"
+    },
+    {
+      label: "TV Shows - Other Languages",
+      value: "global4"
+    }
+  ]
 
   const handleScroll = (scrollAmount: number) => {
     const newScrollPosition = scrollPosition + scrollAmount;
 
     setScrollPosition(newScrollPosition);
-    containerRef.current.scrollLeft = newScrollPosition;
+    containerRef.current!.scrollLeft = newScrollPosition;
 
     // check if scroll position is at the end
     // const carouselWidth = document.getElementById("trendCaraosell")?.clientWidth;
@@ -102,39 +128,80 @@ export default function Home() {
     // }
   }
 
-  function handleOpenDetail(index) {
+  const [region, setRegion] = useState("Indonesia");
+  const [content, setContent] = useState("Movies");
+  const [contentList, setContentList] = useState(indonesiaContent)
+  const [currentCategory, setCurrentCategory] = useState("idn1")
+
+  function handleRegionSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+    setRegion(e.target.value)
+    setScrollPosition(0);
+    containerRef.current!.scrollLeft = 0;
+
+    if (e.target.value === "Indonesia") {
+      setContentList(indonesiaContent)
+      setContent("idn1")
+      setCurrentCategory("idn1")
+    }
+    if (e.target.value === "Global") {
+      setContentList(globalContent)
+      setContent("global1")
+      setCurrentCategory("global1")
+    }
+  }
+
+  function handleContentSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+    setContent(e.target.value)
+    const content = e.target.value
+    setScrollPosition(0);
+    containerRef.current!.scrollLeft = 0;
+
+    if (content == "idn1") {
+      setCurrentCategory("idn1")
+    } else if (content == "idn2") {
+      setCurrentCategory("idn2")
+    } else if (content == "global1") {
+      setCurrentCategory("global1")
+    } else if (content == "global2") {
+      setCurrentCategory("global2")
+    } else if (content == "global3") {
+      setCurrentCategory("global3")
+    } else if (content == "global4") {
+      setCurrentCategory("global4")
+    }
+  }
+
+  function handleOpenDetail(index: number) {
     const id = index + 1;
 
     const answer = document.getElementById(`answer${id}`);
     const icon = document.getElementById(`icon${id}`);
 
     if (lastOpen === id) {
-      answer.classList.remove("visible");
-      answer.style.height = "0";
+      answer!.classList.remove("visible");
+      answer!.style.height = "0";
       icon?.classList.remove("rotate-45");
-      setLastOpen("");
+      setLastOpen(0);
       return;
     }
 
-    if (!answer.classList.contains("visible")) {
-      answer?.classList.add("visible");
-      answer.style.height = "auto";
-      // answer.classList.remove("scale-y-0");
-      // answer.classList.add("scale-y-100");
-      icon.classList.add("rotate-45");
+    if (!answer!.classList.contains("visible")) {
+      answer!.classList.add("visible");
+      answer!.style.height = "auto";
+      icon!.classList.add("rotate-45");
     } else {
-      answer.classList.remove("visible");
-      answer.style.height = "0";
-      // answer.classList.remove("scale-y-100");
-      // answer.classList.add("scale-y-0");
+      answer!.classList.remove("visible");
+      answer!.style.height = "0";
       icon?.classList.remove("rotate-45");
     }
 
-    if (lastOpen !== "") {
+    if (lastOpen !== 0) {
       const lastAnswer = document.getElementById(`answer${lastOpen}`);
       const lastIcon = document.getElementById(`icon${lastOpen}`);
-      lastAnswer.classList.remove("visible");
-      lastAnswer.style.height = "0";
+      if (lastAnswer) {
+        lastAnswer.classList.remove("visible");
+        lastAnswer.style.height = "0";
+      }
       lastIcon?.classList.remove("rotate-45");
     }
     setLastOpen(id);
@@ -146,7 +213,7 @@ export default function Home() {
         <Image src={netflixBg} alt="Netflix Background" className="absolute w-full z-0 h-screen object-cover" />
         <div className="absolute bg-black opacity-70 z-2 w-full h-screen"></div>
         <div className="relative h-screen w-full flex items-center justify-center flex-col px-8">
-          <h1 className="text-3xl md:text-[32px]  lg:text-[56px] font-black text-center md:leading-[3rem] lg:leading-[5rem] max-w-[420px] md:max-w-[432px]  lg:max-w-[588px] mt-48 indent-px">
+          <h1 className="text-3xl md:text-[32px]  lg:text-[56px] font-black text-center md:leading-[3rem] lg:leading-[5rem] max-w-[420px] md:max-w-[432px]  lg:max-w-[610px] mt-48 indent-px">
             Unlimited movies, TV shows, and more
           </h1>
           <p className="mt-6 sm:w-[432px] md:w-[432px] lg:w-[588px] text-base md:text-xl md:font-bold text-center">Starts at IDR 54,000. Cancel anytime.</p>
@@ -173,35 +240,53 @@ export default function Home() {
             </button>
           </form>
         </div>
-        <section className="px-6 md:px-8  lg:px-[148px] mt-14 relative">
+
+        <div className="custom-gradient relative w-full h-[100px]">
+
+          <div className="custom-parent absolute w-full h-full z-10">
+              <div className="custom-child h-1 ">
+              </div>
+          </div>
+        </div>
+
+        <section className="px-6 md:px-8  lg:px-[148px] relative">
           <div className=" ">
             <h1 className="text-[18px] lg:text-[24px] font-bold">Trending Now</h1>
             <div className="flex flex-col md:flex-row md:gap-5">
-              <select className="bg-transparent text-white text-base rounded-md border border-solid border-[0.5x] mt-4 py-4 lg:py-3 pl-3 pr-6 w-full md:w-fit">
+              <select onChange={handleRegionSelect} className="bg-transparent text-white text-base rounded-md border border-solid border-[0.5x] mt-4 py-4 lg:py-3 pl-3 pr-6 w-full md:w-fit">
                 <option className="text-black">Indonesia</option>
                 <option className="text-black">Global</option>
               </select>
-              <select className="bg-transparent text-white text-base rounded-md border border-solid border-[0.5x] mt-4 py-4 lg:py-3 pl-3 pr-6 w-full md:w-fit">
-                <option className="text-black">Movies</option>
-                <option className="text-black">TV Shows</option>
+              <select onChange={handleContentSelect} value={content} className="bg-transparent text-white text-base rounded-md border border-solid border-[0.5x] mt-4 py-4 lg:py-3 pl-3 pr-6 w-full md:w-fit">
+                {contentList && (contentList.map((item, index) => (
+                  <option key={index} value={item.value} className="text-black">{item.label}</option>
+                )))}
+                {/* <option className="text-black">Movies</option>
+                <option className="text-black">TV Shows</option> */}
               </select>
             </div>
 
             <div className="relative">
 
-              <div id="trendCaraosell" className="mt-7 px-5 py-3 gap-5 lg:gap-11 flex flex-row overflow-x-hidden overflow-y-hidden transition-all ease-in-out scroll-smooth" ref={containerRef}>
-                <TrendingNowCard id="trend1" image={poster1} index="1" />
-                <TrendingNowCard id="trend2" image={poster2} index="2" />
-                <TrendingNowCard id="trend3" image={poster3} index="3" />
-                <TrendingNowCard id="trend4" image={poster4} index="4" />
-                <TrendingNowCard id="trend5" image={poster5} index="5" />
-                <TrendingNowCard id="trend6" image={poster6} index="6" />
-                <TrendingNowCard id="trend7" image={poster7} index="7" />
-                <TrendingNowCard id="trend8" image={poster8} index="8" />
-                <TrendingNowCard id="trend9" image={poster9} index="9" />
-                <TrendingNowCard id="trend10" image={poster10} index="10" />
+              {/* <div id="trendCaraosell" className="mt-7 px-5 py-3 gap-5 lg:gap-11 flex flex-row overflow-x-hidden overflow-y-hidden transition-all ease-in-out scroll-smooth" ref={containerRef}>
+                <TrendingNowCard image={poster1} index="1" />
+                <TrendingNowCard image={poster2} index="2" />
+                <TrendingNowCard image={poster3} index="3" />
+                <TrendingNowCard image={poster4} index="4" />
+                <TrendingNowCard image={poster5} index="5" />
+                <TrendingNowCard image={poster6} index="6" />
+                <TrendingNowCard image={poster7} index="7" />
+                <TrendingNowCard image={poster8} index="8" />
+                <TrendingNowCard image={poster9} index="9" />
+                <TrendingNowCard image={poster10} index="10" />
+              </div> */}
 
+              <div id="trendCaraosell" className="mt-7 px-5 py-3 gap-5 lg:gap-11 flex flex-row overflow-x-hidden overflow-y-hidden transition-all ease-in-out scroll-smooth" ref={containerRef}>
+                {
+                  <TrendingNowCard category={currentCategory} />
+                }
               </div>
+
               <div className={`${scrollPosition > 0 ? 'translate-x-0' : '-translate-x-6 opacity-0'} transition ease-in-out delay-500 absolute duration-500 left-0 top-0 transform bg-black h-full flex flex-col justify-center pr-3`}>
                 <button onClick={() => { handleScroll(-scrollPosition) }} className={`bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center hover:bg-[#333333]`}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -219,7 +304,6 @@ export default function Home() {
               </div>
 
               {/* <button onClick={() => { handleScroll(ITEM_WIDTH) }} className={`absolute ${scrollPosition < 900 ? 'translate-x-0' : 'translate-x-6 opacity-0'} transition ease-in delay-500 right-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center`}>
-                
               </button> */}
 
               {/* {(scrollPosition > 0) &&
@@ -243,7 +327,7 @@ export default function Home() {
 
           <div className="mt-16 w-full">
             <h1 className="text-[18px]  lg:text-2xl font-bold">More Reasons to Join</h1>
-            <div className="w-full flex flex-col lg:flex lg:flex-row mt-4 gap-3 md:grid md:grid-cols-2">
+            <div className="w-full flex flex-col xl:flex xl:flex-row mt-4 gap-3 md:w-full md:grid md:grid-cols-2">
               <Card title="Watch on your TV" description="Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more." icon={iconSatu} iconAlt="TV Icon" />
               <Card title="Download your shows to watch offline" description="Save your favorites easily and always have something to watch." icon={iconDua} iconAlt="Download Icon" />
               <Card title="Watch everywhere" description="Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV." icon={iconTiga} iconAlt="Icon Watch" />
@@ -256,14 +340,14 @@ export default function Home() {
             <ul className="flex flex-col gap-2">
               {question.map((item, index) => (
                 <li id={`question${index + 1}`} onClick={() => handleOpenDetail(index)} key={index} className="flex flex-col gap-1">
-                  <div className="flex flex-row justify-between items-center p-6 bg-[#2d2d2d]">
+                  <div className="flex flex-row justify-between items-center p-6 bg-[#2d2d2d] hover:bg-[#414141]">
                     <p className="text-lg md:text-2xl">{item.question}</p>
                     <svg id={`icon${index + 1}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7 duration-200 ease-in-out">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                   </div>
                   <div id={`answer${index + 1}`} className="bg-[#2d2d2d] h-0 mt-0.5 transform transition-[height] overflow-hidden duration-500 ease-in-out">
-                    <p className={`text-2xl p-6`}>{item.answer}</p>
+                    <p className={`text-lg md:text-2xl p-6`}>{item.answer}</p>
                   </div>
                 </li>
               ))}
@@ -275,7 +359,7 @@ export default function Home() {
             <p className="mt-8 text-base">Ready to watch? Enter your email to create or restart your membership.</p>
             <form className="flex flex-col md:flex-row  w-full lg:w-[783px] max-w-full justify-center md:items-center mt-4 gap-4">
               <input type="email" placeholder="Email address" className="bg-transparent w-full lg:w-[561px] px-6 py-4 rounded-sm border-solid border-white border" />
-              <button className="bg-red-600 text-white font-bold px-4 h-[60px] rounded-sm flex flex-row items-center gap-2 w-auto md:w-auto"><p className="text-lg md:text-nowrap  lg:text-xl">Get Started</p>
+              <button className="bg-red-600 text-white w-fit font-bold px-4 h-[60px] rounded-sm flex flex-row items-center gap-2 md:w-auto"><p className="text-lg md:text-nowrap lg:text-xl">Get Started</p>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
