@@ -1,6 +1,13 @@
 import Image from 'next/image';
 
-export default function Card({ title, description, icon, iconAlt }) {
+type CardProps = {
+    title: string;
+    description: string;
+    icon: string;
+    iconAlt: string;
+};
+
+export default function Card({ title, description, icon, iconAlt }: CardProps) {
     return (
         <div className="relative bg-gradient-to-r from-[#192144] to-[#210e17] h-fit md:h-72 lg:h-[325px] rounded-xl shadow-md w-full     md:w-full xl:w-1/4 px-2 py-4">
             <div className="p-4 lg:py-4 lg:px-2 ">

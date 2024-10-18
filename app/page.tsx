@@ -229,7 +229,7 @@ export default function Home() {
                 InputLabelProps={{
                   style: { color: '#b3b3b3' },
                 }}
-                className="bg-transparent w-full px-6 rounded-sm none"
+                className="bg-transparent w-full rounded-sm none"
               />
             </div>
             <button className="bg-red-600 text-white font-bold px-4 h-[60px] rounded-sm ml-2 flex flex-row items-center gap-3">
