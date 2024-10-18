@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./ui/navbar";
-import { inter, open_sans } from "@/app/ui/fonts";
-import icon from "@/app/icon.ico";
+import { inter } from "@/app/ui/fonts";
 
 export const metadata: Metadata = {
   title: "Netflix Indonesia - Watch TV Shows Online, Watch Movies Online",

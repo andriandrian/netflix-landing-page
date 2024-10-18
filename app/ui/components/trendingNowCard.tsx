@@ -1,6 +1,6 @@
 'use client'
 
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { open_sans } from "@/app/ui/fonts";
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
@@ -39,11 +39,20 @@ export default function TrendingNowCard({ category }: TrendingNowCardProps) {
     }
 
     
-    // if (openModal) {
-    //     document.body.classList.add("overflow-y-hidden")
-    // } else {
-    //     document.body.classList.remove("overflow-y-hidden")
-    // }
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            if (openModal) {
+                document.body.classList.add("overflow-y-hidden");
+            } else {
+                document.body.classList.remove("overflow-y-hidden");
+            }
+
+            // Cleanup function to remove the class when the component unmounts
+            return () => {
+                document.body.classList.remove("overflow-y-hidden");
+            };
+        }
+    }, [openModal]);
 
     return (
         <>

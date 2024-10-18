@@ -253,7 +253,7 @@ export default function Home() {
           <div className=" ">
             <h1 className="text-[18px] lg:text-[24px] font-bold">Trending Now</h1>
             <div className="flex flex-col md:flex-row md:gap-5">
-              <select onChange={handleRegionSelect} className="bg-transparent text-white text-base rounded-md border border-solid border-[0.5x] mt-4 py-4 lg:py-3 pl-3 pr-6 w-full md:w-fit">
+              <select onChange={handleRegionSelect} value={region} className="bg-transparent text-white text-base rounded-md border border-solid border-[0.5x] mt-4 py-4 lg:py-3 pl-3 pr-6 w-full md:w-fit">
                 <option className="text-black">Indonesia</option>
                 <option className="text-black">Global</option>
               </select>
