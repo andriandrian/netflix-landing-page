@@ -6,9 +6,7 @@ import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 
 type TrendingNowCardProps = {
-    // id: string;
-    image: StaticImageData;
-    index: string;
+    category: string;
 }
 
 export default function TrendingNowCard({ category }: TrendingNowCardProps) {
@@ -40,11 +38,12 @@ export default function TrendingNowCard({ category }: TrendingNowCardProps) {
         fillData()
     }
 
-    if (openModal) {
-        document.body.classList.add("overflow-y-hidden")
-    } else {
-        document.body.classList.remove("overflow-y-hidden")
-    }
+    
+    // if (openModal) {
+    //     document.body.classList.add("overflow-y-hidden")
+    // } else {
+    //     document.body.classList.remove("overflow-y-hidden")
+    // }
 
     return (
         <>

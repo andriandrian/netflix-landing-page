@@ -10,16 +10,6 @@ import iconEmpat from "../public/4.png";
 import { useState, useRef } from "react";
 import Link from "next/link";
 import TrendingNowCard from "./ui/components/trendingNowCard";
-import poster1 from "../public/poster1.png";
-import poster2 from "../public/poster2.png";
-import poster3 from "../public/poster3.png";
-import poster4 from "../public/poster4.png";
-import poster5 from "../public/poster5.png";
-import poster6 from "../public/poster6.png";
-import poster7 from "../public/poster7.png";
-import poster8 from "../public/poster8.png";
-import poster9 from "../public/poster9.png";
-import poster10 from "../public/poster10.png";
 import * as React from 'react';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
@@ -70,16 +60,8 @@ export default function Home() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [lastOpen, setLastOpen] = useState(0);
   const containerRef = useRef<HTMLInputElement>(null)
-  const ITEM_WIDTH = 900;
-  // const carouselWidth = null;
+  const [itemWidth, setItemWidth] = useState(0);
 
-  // const carouselWidth = document.getElementById("trendCaraosell")
-  // if (carouselWidth) {
-  // console.log(carouselWidth.clientWidth)
-  // ITEM_WIDTH = carouselWidth.clientWidth / 2;
-  // console.log(ITEM_WIDTH)
-  // }
-  // console.log(carouselWidth?.clientWidth)
 
   const indonesiaContent = [
     {
@@ -116,22 +98,40 @@ export default function Home() {
 
     setScrollPosition(newScrollPosition);
     containerRef.current!.scrollLeft = newScrollPosition;
-
-    // check if scroll position is at the end
-    // const carouselWidth = document.getElementById("trendCaraosell")?.clientWidth;
-    // if (newScrollPosition >= carouselWidth) {
-    //   setScrollPosition(0);
-    //   containerRef.current.scrollLeft = 0;
-    // } else if (newScrollPosition < 0) {
-    //   setScrollPosition(carouselWidth - ITEM_WIDTH);
-    //   containerRef.current.scrollLeft = carouselWidth - ITEM_WIDTH;
-    // }
   }
 
   const [region, setRegion] = useState("Indonesia");
   const [content, setContent] = useState("Movies");
   const [contentList, setContentList] = useState(indonesiaContent)
   const [currentCategory, setCurrentCategory] = useState("idn1")
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1536) {
+        setItemWidth(900);
+      } else if (window.innerWidth >= 1280) {
+        setItemWidth(800);
+      } else if (window.innerWidth >= 1024) {
+        setItemWidth(700);
+      } else if (window.innerWidth >= 640) {
+        setItemWidth(500);
+      } else {
+        setItemWidth(350);
+      }
+    };
+
+    // Add event listener on mount
+    window.addEventListener('resize', handleResize);
+
+    // Call the handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   function handleRegionSelect(e: React.ChangeEvent<HTMLSelectElement>) {
     setRegion(e.target.value)
@@ -244,12 +244,12 @@ export default function Home() {
         <div className="custom-gradient relative w-full h-[100px]">
 
           <div className="custom-parent absolute w-full h-full z-10">
-              <div className="custom-child h-1 ">
-              </div>
+            <div className="custom-child h-1 ">
+            </div>
           </div>
         </div>
 
-        <section className="px-6 md:px-8  lg:px-[148px] relative">
+        <section className="px-6 md:px-8  lg:px-20 relative">
           <div className=" ">
             <h1 className="text-[18px] lg:text-[24px] font-bold">Trending Now</h1>
             <div className="flex flex-col md:flex-row md:gap-5">
@@ -288,7 +288,7 @@ export default function Home() {
               </div>
 
               <div className={`${scrollPosition > 0 ? 'translate-x-0' : '-translate-x-6 opacity-0'} transition ease-in-out delay-500 absolute duration-500 left-0 top-0 transform bg-black h-full flex flex-col justify-center pr-3`}>
-                <button onClick={() => { handleScroll(-scrollPosition) }} className={`bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center hover:bg-[#333333]`}>
+                <button onClick={() => { handleScroll(-itemWidth) }} className={`bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center hover:bg-[#333333]`}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                   </svg>
@@ -296,18 +296,18 @@ export default function Home() {
               </div>
 
               <div className={`${scrollPosition < 900 ? 'translate-x-0' : 'translate-x-6 opacity-0'} transition ease-in-out delay-500 absolute duration-500  right-0 top-0 transform bg-black h-full flex flex-col justify-center pl-3`}>
-                <button onClick={() => { handleScroll(ITEM_WIDTH) }} className={`bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center hover:bg-[#333333]`}>
+                <button onClick={() => { handleScroll(itemWidth) }} className={`bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center hover:bg-[#333333]`}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                   </svg>
                 </button>
               </div>
 
-              {/* <button onClick={() => { handleScroll(ITEM_WIDTH) }} className={`absolute ${scrollPosition < 900 ? 'translate-x-0' : 'translate-x-6 opacity-0'} transition ease-in delay-500 right-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center`}>
+              {/* <button onClick={() => { handleScroll(itemWidth) }} className={`absolute ${scrollPosition < 900 ? 'translate-x-0' : 'translate-x-6 opacity-0'} transition ease-in delay-500 right-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center`}>
               </button> */}
 
               {/* {(scrollPosition > 0) &&
-                <button onClick={() => { handleScroll(-ITEM_WIDTH) }} className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center hover:bg-[#333333]">
+                <button onClick={() => { handleScroll(-itemWidth) }} className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center hover:bg-[#333333]">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                   </svg>
@@ -315,7 +315,7 @@ export default function Home() {
               }
 
               {(scrollPosition < 800) &&
-                <button onClick={() => { handleScroll(ITEM_WIDTH) }} className="absolute translate-x-4 transition ease-in delay-500 right-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center">
+                <button onClick={() => { handleScroll(itemWidth) }} className="absolute translate-x-4 transition ease-in delay-500 right-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                   </svg>
@@ -368,7 +368,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="px-6 md:px-8 lg:px-[148px] mt-12 pb-36 text-[#FFFB3] opacity-70">
+        <section className="px-6 md:px-8 lg:px-20 mt-12 pb-36 text-[#FFFB3] opacity-70">
           <p className="text-base">Questions? Call <Link href="tel:0800-917-0650" className="text-base font-bold underline">0800-917-0650</Link></p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 pt-8 text-sm underline">
