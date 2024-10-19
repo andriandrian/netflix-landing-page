@@ -268,19 +268,6 @@ export default function Home() {
 
             <div className="relative">
 
-              {/* <div id="trendCaraosell" className="mt-7 px-5 py-3 gap-5 lg:gap-11 flex flex-row overflow-x-hidden overflow-y-hidden transition-all ease-in-out scroll-smooth" ref={containerRef}>
-                <TrendingNowCard image={poster1} index="1" />
-                <TrendingNowCard image={poster2} index="2" />
-                <TrendingNowCard image={poster3} index="3" />
-                <TrendingNowCard image={poster4} index="4" />
-                <TrendingNowCard image={poster5} index="5" />
-                <TrendingNowCard image={poster6} index="6" />
-                <TrendingNowCard image={poster7} index="7" />
-                <TrendingNowCard image={poster8} index="8" />
-                <TrendingNowCard image={poster9} index="9" />
-                <TrendingNowCard image={poster10} index="10" />
-              </div> */}
-
               <div id="trendCaraosell" className="mt-7 px-5 py-3 gap-5 lg:gap-11 flex flex-row overflow-x-hidden overflow-y-hidden transition-all ease-in-out scroll-smooth" ref={containerRef}>
                 {
                   <TrendingNowCard category={currentCategory} />
@@ -302,25 +289,6 @@ export default function Home() {
                   </svg>
                 </button>
               </div>
-
-              {/* <button onClick={() => { handleScroll(itemWidth) }} className={`absolute ${scrollPosition < 900 ? 'translate-x-0' : 'translate-x-6 opacity-0'} transition ease-in delay-500 right-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center`}>
-              </button> */}
-
-              {/* {(scrollPosition > 0) &&
-                <button onClick={() => { handleScroll(-itemWidth) }} className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center hover:bg-[#333333]">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                  </svg>
-                </button>
-              }
-
-              {(scrollPosition < 800) &&
-                <button onClick={() => { handleScroll(itemWidth) }} className="absolute translate-x-4 transition ease-in delay-500 right-0 top-1/2 transform -translate-y-1/2 bg-[#1a1a1a] w-6 h-[120px] flex justify-center rounded-md items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                  </svg>
-                </button>
-              } */}
             </div>
 
           </div>
@@ -328,10 +296,30 @@ export default function Home() {
           <div className="mt-16 w-full">
             <h1 className="text-[18px]  lg:text-2xl font-bold">More Reasons to Join</h1>
             <div className="w-full flex flex-col xl:flex xl:flex-row mt-4 gap-3 md:w-full md:grid md:grid-cols-2">
-              <Card title="Watch on your TV" description="Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more." icon={iconSatu} iconAlt="TV Icon" />
-              <Card title="Download your shows to watch offline" description="Save your favorites easily and always have something to watch." icon={iconDua} iconAlt="Download Icon" />
-              <Card title="Watch everywhere" description="Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV." icon={iconTiga} iconAlt="Icon Watch" />
-              <Card title="Create profiles for kids" description="Send kids on adventures with their favorite characters in a space made just for them — free with your membership." icon={iconEmpat} iconAlt="Icon Profile" />
+              <Card
+                title="Watch on your TV"
+                description="Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more."
+                icon={iconSatu}
+                iconAlt="TV Icon"
+              />
+              <Card
+                title="Download your shows to watch offline"
+                description="Save your favorites easily and always have something to watch."
+                icon={iconDua}
+                iconAlt="Download Icon"
+              />
+              <Card
+                title="Watch everywhere"
+                description="Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV."
+                icon={iconTiga}
+                iconAlt="Icon Watch"
+              />
+              <Card
+                title="Create profiles for kids"
+                description="Send kids on adventures with their favorite characters in a space made just for them — free with your membership."
+                icon={iconEmpat}
+                iconAlt="Icon Profile"
+              />
             </div>
           </div>
 

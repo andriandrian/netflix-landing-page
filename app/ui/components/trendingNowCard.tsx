@@ -9,13 +9,22 @@ type TrendingNowCardProps = {
     category: string;
 }
 
+interface TrendingDataItem {
+    category: string;
+    id: string;
+    title: string;
+    image: string;
+    description: string;
+    tag: string[];
+}
+
 export default function TrendingNowCard({ category }: TrendingNowCardProps) {
     const [openModal, setOpenModal] = useState(false);
-    const [currentData, setCurrentData] = useState([]);
-    const [list, setList] = useState([]);
+    const [currentData, setCurrentData] = useState<TrendingDataItem | null>(null);
+    const [list, setList] = useState<TrendingDataItem[]>([]);
 
     useEffect(() => {
-        const data = trendingData.filter((data) => data.category === category)
+        const data: any = trendingData.filter((data) => data.category === category)
         setList(data)
         console.log(data)
     }, [category])
@@ -27,10 +36,8 @@ export default function TrendingNowCard({ category }: TrendingNowCardProps) {
         const id = e.currentTarget.id
 
         function fillData() {
-            // const data = trendingData.filter((data) => data.id === id)
-            const data = trendingData[+id - 1]
-            // setCurrentData([])
-            setCurrentData(data)
+            const data = trendingData.find((data) => data.id === id); // Gunakan find untuk mencari berdasarkan id
+            setCurrentData(data || null); // Set currentData sebagai null jika tidak ditemukan
             console.log(data, "data modal")
             console.log("CURRENT DATA", currentData)
         }
@@ -38,7 +45,7 @@ export default function TrendingNowCard({ category }: TrendingNowCardProps) {
         fillData()
     }
 
-    
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             if (openModal) {
@@ -110,7 +117,7 @@ export default function TrendingNowCard({ category }: TrendingNowCardProps) {
     )
 }
 
-const trendingData = [
+const trendingData: TrendingDataItem[] = [
     {
         id: "1",
         image: '/images/idn1/poster1.png',
