@@ -14,6 +14,7 @@ import * as React from 'react';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import { OutlinedInputProps } from "@mui/material";
+import Navbar from "./ui/navbar";
 
 
 const RedditTextField = styled((props: TextFieldProps) => (
@@ -208,11 +209,14 @@ export default function Home() {
   }
 
   return (
-    <div className="" >
-      <main className="relative">
-        <Image src={netflixBg} alt="Netflix Background" className="absolute w-full z-0 h-screen object-cover" />
-        <div className="absolute bg-black opacity-70 z-2 w-full h-screen"></div>
-        <div className="relative h-screen w-full flex items-center justify-center flex-col px-8">
+    <div className="mx-auto relative" >
+      <main className="relative w-full 2xl:max-w-[1920px] mx-auto">
+        <div className="absolute z-40 w-full mx-auto">
+          <Navbar />
+        </div>
+        <Image src={netflixBg} alt="Netflix Background" className="absolute w-full z-0 h-screen object-cover 2xl:max-h-[996px]" />
+        <div className="absolute bg-black opacity-70 z-2 w-full h-screen 2xl:max-h-[996px]"></div>
+        <div className="relative h-screen w-full flex items-center justify-center flex-col px-8 max-h-[996px]">
           <h1 className="text-3xl md:text-[32px]  lg:text-[56px] font-black text-center md:leading-[3rem] lg:leading-[5rem] max-w-[420px] md:max-w-[432px]  lg:max-w-[610px] mt-48 indent-px">
             Unlimited movies, TV shows, and more
           </h1>
@@ -249,8 +253,8 @@ export default function Home() {
           </div>
         </div>
 
-        <section className="px-6 md:px-8  lg:px-20 relative">
-          <div className=" ">
+        <section className="px-6 md:px-8  lg:px-36 2xl:px-[354px] relative">
+          <div className="">
             <h1 className="text-[18px] lg:text-[24px] font-bold">Trending Now</h1>
             <div className="flex flex-col md:flex-row md:gap-5">
               <select onChange={handleRegionSelect} value={region} className="bg-transparent text-white text-base rounded-md border border-solid border-[0.5x] mt-4 py-4 lg:py-3 pl-3 pr-6 w-full md:w-fit">
@@ -356,7 +360,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="px-6 md:px-8 lg:px-20 mt-12 pb-36 text-[#FFFB3] opacity-70">
+        <section className="px-6 md:px-8 lg:px-36 2xl:px-[354px] mt-12 pb-36 text-[#FFFB3] opacity-70">
           <p className="text-base">Questions? Call <Link href="tel:0800-917-0650" className="text-base font-bold underline">0800-917-0650</Link></p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 pt-8 text-sm underline">
@@ -380,8 +384,8 @@ export default function Home() {
           </div>
 
           <select className="mt-14 px-4 py-2 text-white text-sm bg-transparent rounded-md border border-solid mr-3 opacity-100">
-            <option className='text-black'>Bahasa Indonesia</option>
             <option className='text-black'>English</option>
+            <option className='text-black'>Bahasa Indonesia</option>
           </select>
 
           <p className="mt-14 text-sm">Netflix Indonesia</p>

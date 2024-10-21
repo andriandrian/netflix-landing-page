@@ -1,9 +1,13 @@
 import Image from "next/image";
 import backgroundImage from "../../public/backgroundImage.jpg";
+import Navbar from "../ui/navbar";
 
 export default function Page() {
     return (
-        <div className="h-screen w-full"> 
+        <div className="h-screen w-full mx-auto"> 
+            <div className="absolute z-40 w-full mx-auto">
+                <Navbar />
+            </div>
             <Image src={backgroundImage} alt="bg" layout="fill" objectFit="cover" />
             <div className="bg-black opacity-60 h-full w-full absolute"></div>
             <div className="flex justify-center items-center h-full relative ">

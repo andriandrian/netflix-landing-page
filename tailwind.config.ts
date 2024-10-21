@@ -12,6 +12,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      screens: {
+        "2xl": "1920px",
+        // => @media (min-width: 1536px) { ... }
+      },
     },
   },
   plugins: [],

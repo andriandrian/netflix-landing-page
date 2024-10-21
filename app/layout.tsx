@@ -17,12 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}
-        className={`${inter.className} antialiased`}
+        className={`${inter.className} antialiased mx-auto`}
       >
-        <div className="absolute z-40 w-full">
+        {/* <div className="absolute z-40 w-full mx-auto">
           <Navbar />
-        </div>
-        <div className="relative z-0">
+        </div> */}
+        <div className="relative z-0 mx-auto">
 
           {children}
         </div>
