@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./ui/navbar";
+// import Navbar from "./ui/navbar";
 import { inter } from "@/app/ui/fonts";
 
 export const metadata: Metadata = {
