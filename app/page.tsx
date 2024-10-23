@@ -108,7 +108,9 @@ export default function Home() {
 
   React.useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1536) {
+      if (window.innerWidth >= 1920) {
+        setItemWidth(700);
+      } else if (window.innerWidth >= 1536) {
         setItemWidth(900);
       } else if (window.innerWidth >= 1280) {
         setItemWidth(800);
