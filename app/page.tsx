@@ -333,7 +333,7 @@ export default function Home() {
             <h1 className="text-lg md:text-3xl font-bold mb-4">Frequently Asked Question</h1>
             <ul className="flex flex-col gap-2">
               {question.map((item, index) => (
-                <li id={`question${index + 1}`} onClick={() => handleOpenDetail(index)} key={index} className="flex flex-col gap-1">
+                <li id={`question${index + 1}`} onClick={() => handleOpenDetail(index)} key={index} className="flex flex-col gap-1 cursor-pointer text-white">
                   <div className="flex flex-row justify-between items-center p-6 bg-[#2d2d2d] hover:bg-[#414141]">
                     <p className="text-lg md:text-2xl">{item.question}</p>
                     <svg id={`icon${index + 1}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7 duration-200 ease-in-out">

@@ -7,7 +7,6 @@ import netflixLogo from '../../public/netflix-logo.svg';
 
 export default function Navbar() {
     const pathname = usePathname()
-    console.log(pathname)
     return (
         <nav className="flex items-center justify-between w-full h-20 px-6 lg:px-[148px] shadow-md absolute max-w-[1920px] 2xl:px-[354px]">
             <div className="flex items-center gap-8">

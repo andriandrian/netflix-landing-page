@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}
-        className={`${inter.className} antialiased mx-auto`}
+        className={`${inter.className} antialiased mx-auto bg-black text-white`}
       >
         {/* <div className="absolute z-40 w-full mx-auto">
           <Navbar />
